@@ -1,0 +1,179 @@
+.navbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0.8rem;
+    box-shadow: 0px 4px 15px 0px #00000026;
+}
+
+.navLogo {
+    font-size: 1.85rem;
+    margin: 0;
+}
+
+.navBtn {
+    width: 36%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+.navBtnMobile {
+    display: none;
+}
+
+.navBtn>button {
+    border: none;
+    color: white;
+    width: 8.5rem;
+    height: 45px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "DM Sans", sans-serif;
+    border-radius: 1.25rem;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF7373;
+}
+
+.navBtn>button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.signinBtn {
+    background-color: #73ABFF!important;
+}
+
+.hamburgerContent {
+    position: absolute;
+    top: 4rem;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    z-index: 2;
+}
+
+.profileImage {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.userName {
+    margin: 0 0 1.5rem 0;
+}
+
+.logoutBtn {
+    border: none;
+    color: white;
+    width: 8.5rem;
+    height: 45px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "DM Sans", sans-serif;
+    border-radius: 1.25rem;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF7373;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+
+    .navBtn {
+        display: none;
+    }
+
+    .navBtnMobile {
+        width: 36%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .hamburgerContentMobile {
+        position: absolute;
+        width: 100%;
+        top: 3rem;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        padding: 2rem 0rem;
+        z-index: 5;
+        gap: 2rem;
+    }
+
+    .userSection {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .close {
+        position: absolute;
+        top: 5.5rem;
+        right: 1rem;
+        cursor: pointer;
+        z-index: 6;
+        font-size: 1.2rem;
+    }
+
+    .signinBtn {
+        background-color: #FF7373;
+    }
+
+    .hamburgerContentMobile>button {
+        border: none;
+        color: white;
+        width: 8.5rem;
+        height: 45px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: "DM Sans", sans-serif;
+        border-radius: 1.25rem;
+        transition: all 0.3s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FF7373;
+    }
+
+    .hamburgerContentMobile>button:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+    .userName {
+        margin: 0;
+    }
+
+    .navLogo {
+        font-size: 25px;
+        margin: 0;
+    }
+}

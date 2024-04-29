@@ -1,0 +1,44 @@
+.userStoriesBody {
+    margin: 0 1rem;
+}
+
+.yourStoriesHeading {
+    text-align: center;
+    margin: 2rem;
+    font-size: 30px;
+}
+
+.yourStoriesContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    place-items: center;
+    row-gap: 2rem;
+}
+
+.noStoriesContainer {
+    position: absolute;
+    top: 10rem;
+    text-align: center;
+    color: #ffff;
+    font-size: 1rem;
+}
+
+.noStoriesHeading {
+    font-size: 30px;
+    color: #8E8E8E;
+    margin: 6rem 0 8rem 0;
+}
+
+@media screen and (max-width: 768px) {
+    .yourStoriesHeading, .noStoriesHeading{
+        font-size: 1.5rem;
+    }
+
+    .yourStoriesContainer {
+        display: grid;
+        grid-template-columns: 1fr ;
+        row-gap: 1rem;
+        place-items: center;
+        justify-content: center;
+    }
+}

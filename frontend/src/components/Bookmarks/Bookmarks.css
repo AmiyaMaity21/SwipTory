@@ -1,0 +1,68 @@
+.bookmarkBody {
+    margin: 0 1rem;
+}
+
+.bookmarkHeading {
+    margin: 2rem;
+    text-align: center;
+    font-size: 30px;
+}
+
+.bookmarksContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 2rem;
+    place-items: center;
+}
+
+.noBookamarksContainer {
+    position: absolute;
+    top: 10rem;
+    text-align: center;
+    color: #ffff;
+    font-size: 1rem;
+}
+
+.noBookmarkHeading {
+    font-size: 30px;
+    margin: 6rem 0 8rem 0;
+    color: #8E8E8E;
+}
+
+.backToHomeBtn {
+    border: none;
+    color: white;
+    width: 8.5rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 1.25rem;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF7373;
+}
+
+.backToHomeBtn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+
+    .noBookmarkHeading,.bookmarkHeading {
+        font-size: 1.5rem;
+    }
+
+    .bookmarksContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+        place-items: center;
+        justify-content: center;
+    }
+}

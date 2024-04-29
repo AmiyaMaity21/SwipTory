@@ -1,0 +1,221 @@
+.image-slider .slick-prev {
+    position: absolute;
+    z-index: 5;
+    transform: translate(-150px, -50px);
+}
+
+.image-slider .slick-prev:before {
+    content: url('data:image/svg+xml,%3Csvg width="31" height="53" viewBox="0 0 31 53" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M27.4817 54.3092L31.6309 49.8637L9.69969 27.6362L31.6309 5.40864L27.4817 0.963131L0.808701 27.6362L27.4817 54.3092Z" fill="white"/%3E%3C/svg%3E');
+}
+
+.image-slider .slick-next {
+    position: absolute;
+    z-index: 5;
+    transform: translate(150px, -50px);
+}
+
+.image-slider .slick-next:before {
+    content: url('data:image/svg+xml,%3Csvg width="31" height="53" viewBox="0 0 31 53" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M4.51828 0.963684L0.369141 5.40919L22.3003 27.6367L0.369141 49.8643L4.51828 54.3098L31.1913 27.6367L4.51828 0.963684Z" fill="white"/%3E%3C/svg%3E');
+}
+
+.image-slider .slick-dots {
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+    color: #D9D9D9;
+    top: 1.5rem;
+}
+
+.image-slider .slick-dots li {
+    width: 100%;
+    height: 4px;
+    background-color: #D9D9D9;
+}
+
+.image-slider .slick-dots li button:before {
+    color: white;
+}
+
+.slick-dots li.slick-active {
+    background-color: white;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.viewStory {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+}
+
+.slider-container {
+    position: relative;
+    width: 339px;
+    height: 605px;
+    border-radius: 10px;
+}
+
+.slideImage {
+    width: 339px;
+    height: 605px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.viewStoryBtn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewStoryCloseBtn {
+    position: absolute;
+    transform: translate(-160px, 50px);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+.shareBtn {
+    position: absolute;
+    transform: translate(120px, 50px);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+.viewStoryBookmarkBtn {
+    position: absolute;
+    transform: translate(-120px, -45px);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.likeBtn {
+    position: absolute;
+    transform: translate(80px, -45px);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.likeBtn p {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.viewStoryDetails {
+    position: relative;
+    bottom: 7.5rem;
+    color: #ffffff;
+    margin: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.viewStoryDetails>h2 {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.viewStoryDetails>p {
+    font-size: 10px;
+}
+
+.linkCopied {
+    position: absolute;
+    transform: translateY(140px);
+    background-color: #ffffff;
+    color: #FF0000;
+    border-radius: 62px;
+    width: 301px;
+    padding: 0.5rem 0;
+    text-align: center;
+    font-weight: 700;
+    z-index: 1000;
+}
+
+@media screen and (max-width: 768px) {
+    .viewStoryDetails>h2 {
+        font-size: 35px;
+    }
+
+    .viewStoryDetails>p {
+        font-size: 20px;
+    }
+
+    .viewStoryDetails {
+        bottom: 12rem;
+        margin: 0 1.5rem;
+    }
+
+    .slider-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+    }
+
+    .slideImage {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+    }
+
+    .viewStory {
+        margin: 0;
+    }
+
+    .viewStoryCloseBtn {
+        transform: none;
+        left: 1rem;
+        top: 3rem;
+    }
+
+    .shareBtn {
+        transform: none;
+        right: 1rem;
+        top: 3rem;
+    }
+
+    .viewStoryBookmarkBtn {
+        transform: none;
+        left: 3rem;
+        bottom: 1.25rem;
+    }
+
+    .likeBtn {
+        transform: none;
+        right: 1rem;
+        bottom: 1.25rem;
+    }
+
+}

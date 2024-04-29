@@ -1,0 +1,168 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 40%;
+    padding: 2rem 6rem;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.26);
+    background-color: white;
+    z-index: 100;
+}
+
+.formContainer>div:first-child {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.formCloseBtn {
+    background-color: white;
+    color: #FF0000;
+    border: 2px solid #FF0000;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+}
+
+.formHeading {
+    text-align: center;
+    font-size: 25px;
+    margin: 4rem 0 3rem 0;
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.inputContainer>label {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.inputField {
+    width: 70%;
+    border: 1px solid black;
+    outline: none;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2.5rem;
+}
+
+.buttonContainer>button {
+    width: 129px;
+    height: 45px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: "DM Sans", sans-serif;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: #73abff;
+    font-weight: 700;
+    margin: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.buttonContainer>button:hover {
+    background-color: #4d8bff;
+}
+
+.showingPassword {
+    position: absolute;
+    right: 6.5rem;
+    bottom: 9.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.errorContainer {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-25%);
+    display: flex;
+    justify-content: center;
+    
+}
+
+.error {
+    color: #FF0000;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .formContainer {
+        width: 60%;
+        padding: 1rem 0 5rem 1rem;
+    }
+
+    .formCloseBtn {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .formHeading {
+        font-size: 1.2rem;
+    }
+
+    .inputContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .inputField {
+        margin-top: 0.5rem;
+        width: 90%;
+    }
+
+    .formContainer>div:first-child {
+        top: 0;
+        right: 0;
+    }
+
+    .showingPassword {
+        right: 2rem;
+        bottom: 12.75rem;
+    }
+    .errorContainer {
+        transform: translate(-50%,-200%);
+    }
+
+}
