@@ -23,13 +23,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 export const register = (userData) => async (dispatch) => {
   try {
     dispatch(registerRequest());
-    const { data } = await axiosInstance.post(
-      `${backendUrl}/user/register`,
-      userData,
-      {
-        withCredentials: true,
-      }
-    );
+    const { data } = await axiosInstance.post(`${backendUrl}/user/register`,userData);
     dispatch(registerSuccess(data));
     toast.success("Registration Successful", {
       position: "bottom-right",
@@ -89,6 +83,7 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axiosInstance.get(`${backendUrl}/user/me`);
     dispatch(loadUserSuccess(data));
   } catch (error) {
+    console.log(error.response.data);
     dispatch(loadUserFailure());
   }
 };

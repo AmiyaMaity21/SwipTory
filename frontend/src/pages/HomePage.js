@@ -15,7 +15,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const handleCategoryClick = (newCategory) => {
-    console.log(newCategory);
     setCategory(newCategory);
   };
 

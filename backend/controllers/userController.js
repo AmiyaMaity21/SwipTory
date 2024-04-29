@@ -23,7 +23,12 @@ const registerUser = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
-    res.cookie("token", token, { httpOnly: true, strict: true, secure: true });
+    res.cookie("token", token, {
+      httpOnly: true,
+      strict: true,
+      secure: true,
+      expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    });
     res.status(201).json({
       success: true,
       token,
@@ -59,7 +64,12 @@ const loginUser = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
-    res.cookie("token", token, { httpOnly: true, secure: true });
+    res.cookie("token", token, {
+      httpOnly: true,
+      strict: true,
+      secure: true,
+      expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    });
     res.status(201).json({
       success: true,
       token,
