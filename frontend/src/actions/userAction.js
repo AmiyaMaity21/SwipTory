@@ -18,6 +18,7 @@ import {
 } from "../slice/userSlice";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+console.log(backendUrl);
 
 // Register User
 export const register = (userData) => async (dispatch) => {
@@ -83,7 +84,6 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axiosInstance.get(`${backendUrl}/user/me`);
     dispatch(loadUserSuccess(data));
   } catch (error) {
-    console.log(error.response.data);
     dispatch(loadUserFailure());
   }
 };

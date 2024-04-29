@@ -68,6 +68,7 @@ const loginUser = async (req, res, next) => {
       httpOnly: true,
       strict: true,
       secure: true,
+      sameSite: 'None',
       expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
     });
     res.status(201).json({
