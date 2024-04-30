@@ -52,7 +52,7 @@ const updateStoryDetailsById = async (req, res, next) => {
   try {
     const story = await Story.findById(req.params.id);
     if (!story) {
-      return res.status(404).json({ error: "Story not found" });
+      return res.status(404).json({ errorMessage: "Story not found" });
     }
     const createdBy = req.user.id;
     const { slides } = req.body;

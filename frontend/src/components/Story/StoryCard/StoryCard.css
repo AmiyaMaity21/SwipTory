@@ -20,12 +20,14 @@
 
 .storyHeading {
     font-size: 20px;
+    font-weight: 700;
 }
 
 .storyDescription {
     margin-top: 0.2rem;
     letter-spacing: 0.1rem;
     font-size: 10px;
+    font-weight: 700;
 }
 
 .editStory {
@@ -61,10 +63,11 @@
     }
 
     .storyHeading {
-        font-size: 30px;
+        font-size: 24px;
     }
 
     .storyDescription {
-        font-size: 18px;
+        font-size: 16px;
     }
+    
 }

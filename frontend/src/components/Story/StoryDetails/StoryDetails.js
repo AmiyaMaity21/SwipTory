@@ -35,7 +35,7 @@ const StoryDetails = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 200000);
+    setTimeout(() => setCopySuccess(false), 2000);
   };
 
   const handleBookmark = () => {
@@ -105,10 +105,13 @@ const StoryDetails = () => {
                         />
                         <div className="viewStoryDetails">
                           <h2>
-                            {slide?.heading.substring(0, 25)}
-                            {slide?.heading.length > 25 && "..."}
+                            {slide?.heading.substring(0, 20)}
+                            {slide?.heading.length > 20 && "..."}
                           </h2>
-                          <p>{slide?.description}</p>
+                          <p>
+                            {slide?.description.substring(0, 100)}
+                            {slide?.description.length > 100 && "..."}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -140,7 +143,7 @@ const StoryDetails = () => {
                             : "white",
                       }}
                     />
-                    <p>{totalLikes + (newLike ? 1 : 0)}</p>
+                    <p className="totalLikes">{totalLikes + (newLike ? 1 : 0)}</p>
                   </button>
                 </div>
               </div>

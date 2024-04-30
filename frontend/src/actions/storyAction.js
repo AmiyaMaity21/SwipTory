@@ -29,6 +29,7 @@ import {
   editStoryFailure,
 } from "../slice/storySlice";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 // Create a new story
 export const createStory = (slides) => async (dispatch) => {
   try {
@@ -123,7 +124,6 @@ export const getBookmarks = () => async (dispatch) => {
     const { data } = await axios.get(`${backendUrl}/story/bookmarks`);
     dispatch(getBookmarksSuccess(data.bookmarks));
   } catch (error) {
-    console.log(error.response.data)
     dispatch(getBookmarksFailure());
     toast.error(error.response.data);
   }
@@ -151,7 +151,6 @@ export const likeStory = (id) => async (dispatch) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(likeRequest());
     const data = await axios.put(`${backendUrl}/story/like/${id}`);
-    console.log("data", data);
     dispatch(likeSuccess(data.story));
     toast.success("Story liked successfully", { position: "top-center", autoClose: 2000 });
   } catch (error) {

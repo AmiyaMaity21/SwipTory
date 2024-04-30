@@ -118,7 +118,7 @@
     transform: translate(80px, -45px);
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: #ffffff;
     cursor: pointer;
     z-index: 1000;
@@ -129,7 +129,9 @@
 
 .likeBtn p {
     font-size: 10px;
-    margin-left: 5px;
+    margin-left: 7px;
+    font-weight: 700;
+    font-family: "DM Sans", sans-serif;
 }
 
 .viewStoryDetails {
@@ -137,6 +139,7 @@
     bottom: 7.5rem;
     color: #ffffff;
     margin: 0 1.5rem;
+    font-weight: 700;
     display: flex;
     flex-direction: column;
 }
@@ -152,24 +155,25 @@
 
 .linkCopied {
     position: absolute;
-    transform: translateY(140px);
+    bottom: 11rem;
     background-color: #ffffff;
     color: #FF0000;
     border-radius: 62px;
     width: 301px;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     text-align: center;
+    font-size: 14px;
     font-weight: 700;
     z-index: 1000;
 }
 
 @media screen and (max-width: 768px) {
     .viewStoryDetails>h2 {
-        font-size: 35px;
+        font-size: 28px;
     }
 
     .viewStoryDetails>p {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .viewStoryDetails {
@@ -196,26 +200,39 @@
 
     .viewStoryCloseBtn {
         transform: none;
-        left: 1rem;
+        left: 0.5rem;
         top: 3rem;
+        font-size: 2rem;
     }
 
     .shareBtn {
         transform: none;
-        right: 1rem;
+        right: 0.5rem;
         top: 3rem;
+        font-size: 2rem;
     }
 
     .viewStoryBookmarkBtn {
         transform: none;
         left: 3rem;
         bottom: 1.25rem;
+        font-size: 2rem;
     }
 
     .likeBtn {
         transform: none;
-        right: 1rem;
+        right: 2rem;
         bottom: 1.25rem;
+        font-size: 2rem;
+    }
+
+    .linkCopied {
+        bottom: 20rem;
+        width: 321px;
+        font-size: 20px; 
+    }
+    .likeBtn p {
+        font-size: 15px;
     }
 
 }

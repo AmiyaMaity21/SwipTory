@@ -69,7 +69,6 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axios.get(`${backendUrl}/user/me`);
     dispatch(loadUserSuccess(data));
   } catch (error) {
-    console.log(error.response.data.errorMessage)
     dispatch(loadUserFailure());
   }
 };
