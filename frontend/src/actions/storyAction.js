@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosInstance from './axiosInstance';
+// import axiosInstance from './axiosInstance';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -32,8 +32,10 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 // Create a new story
 export const createStory = (slides) => async (dispatch) => {
   try {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(createStoryRequest());
-    const { data } = await axiosInstance.post(`${backendUrl}/story/create`, { slides });
+    const { data } = await axios.post(`${backendUrl}/story/create`, { slides });
     dispatch(createStorySuccess(data));
     toast.success("Story created successfully", { position: "top-center", autoClose: 2000});
   } catch (error) {
@@ -97,8 +99,10 @@ export const getStory = (storyId, userId) => async (dispatch) => {
 // Edit Story
 export const updateStory = (updatedStory) => async (dispatch) => {
   try {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(editStoryRequest());
-    const { data } = await axiosInstance.put(
+    const { data } = await axios.put(
       `${backendUrl}/story/edit/${updatedStory.storyId}`,
       updatedStory, { withCredentials: true }
     );
@@ -113,8 +117,10 @@ export const updateStory = (updatedStory) => async (dispatch) => {
 // Get Bookmarks story
 export const getBookmarks = () => async (dispatch) => {
   try {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(getBookmarksRequest());
-    const { data } = await axiosInstance.get(`${backendUrl}/story/bookmarks`);
+    const { data } = await axios.get(`${backendUrl}/story/bookmarks`);
     dispatch(getBookmarksSuccess(data.bookmarks));
   } catch (error) {
     console.log(error.response.data)
@@ -126,8 +132,10 @@ export const getBookmarks = () => async (dispatch) => {
 // Bookmark story
 export const bookmarkStory = (id) => async (dispatch) => {
   try {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(bookmarkRequest());
-    const { data } = await axiosInstance.post(`${backendUrl}/story/bookmark/${id}`);
+    const { data } = await axios.post(`${backendUrl}/story/bookmark/${id}`);
     dispatch(bookmarkSuccess(data.story));
     toast.success("Story bookmarked successfully", { position: "top-center", autoClose: 2000 });
   } catch (error) {
@@ -139,8 +147,10 @@ export const bookmarkStory = (id) => async (dispatch) => {
 // Like Story
 export const likeStory = (id) => async (dispatch) => {
   try {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(likeRequest());
-    const data = await axiosInstance.put(`${backendUrl}/story/like/${id}`);
+    const data = await axios.put(`${backendUrl}/story/like/${id}`);
     console.log("data", data);
     dispatch(likeSuccess(data.story));
     toast.success("Story liked successfully", { position: "top-center", autoClose: 2000 });

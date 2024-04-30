@@ -4,7 +4,7 @@ import avatar from "../../assets/man.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../actions/userAction";
+import { loadUser } from "../../actions/userAction";
 import { FaBookmark } from "react-icons/fa";
 
 const Navbar = ({ showRegisterForm, showLoginForm, showStoryForm }) => {
@@ -17,7 +17,9 @@ const Navbar = ({ showRegisterForm, showLoginForm, showStoryForm }) => {
     setMenuOpen(!menuOpen);
   };
   const handleLogout = () => {
-    dispatch(logout());
+    localStorage.clear();
+    dispatch(loadUser());
+    navigate("/");
   };
   return (
     <div className="navbarContainer">
@@ -105,7 +107,7 @@ const Navbar = ({ showRegisterForm, showLoginForm, showStoryForm }) => {
                       width="40rem"
                       onClick={() => navigate("/")}
                     />
-                    <h4 className="userName">Amiya Maity</h4>
+                    <h4 className="userName">{user.username}</h4>
                   </div>
                   <button
                     className="YourstoryBtn"

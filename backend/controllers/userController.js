@@ -23,12 +23,6 @@ const registerUser = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
-    res.cookie("token", token, {
-      httpOnly: true,
-      strict: true,
-      secure: true,
-      expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    });
     res.status(201).json({
       success: true,
       token,
@@ -64,13 +58,13 @@ const loginUser = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
-    res.cookie("token", token, {
-      httpOnly: true,
-      strict: true,
-      secure: true,
-      sameSite: 'None',
-      expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   strict: true,
+    //   secure: true,
+    //   sameSite: 'None',
+    //   expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    // });
     res.status(201).json({
       success: true,
       token,
@@ -95,16 +89,16 @@ const getUserDetails = async (req, res, next) => {
 };
 
 // Logout User
-const logoutUser = (req, res, next) => {
-  try {
-    res.clearCookie("token");
-    res.status(200).json({
-      success: true,
-      message: "Successfully Logged Out",
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+// const logoutUser = (req, res, next) => {
+//   try {
+//     res.clearCookie("token");
+//     res.status(200).json({
+//       success: true,
+//       message: "Successfully Logged Out",
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
-module.exports = { registerUser, loginUser, getUserDetails, logoutUser };
+module.exports = { registerUser, loginUser, getUserDetails };

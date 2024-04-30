@@ -1,5 +1,5 @@
-// import axios from "axios";
-import axiosInstance from "./axiosInstance";
+import axios from "axios";
+// import axiosInstance from "./axiosInstance";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -9,9 +9,6 @@ import {
   registerRequest,
   registerSuccess,
   registerFailure,
-  logoutRequest,
-  logoutSuccess,
-  logoutFailure,
   loadUserSuccess,
   loadUserRequest,
   loadUserFailure,
@@ -24,7 +21,8 @@ console.log(backendUrl);
 export const register = (userData) => async (dispatch) => {
   try {
     dispatch(registerRequest());
-    const { data } = await axiosInstance.post(`${backendUrl}/user/register`,userData);
+    const { data } = await axios.post(`${backendUrl}/user/register`,userData);
+    localStorage.setItem('token', data.token);
     dispatch(registerSuccess(data));
     toast.success("Registration Successful", {
       position: "bottom-right",
@@ -43,10 +41,11 @@ export const register = (userData) => async (dispatch) => {
 export const login = (userData) => async (dispatch) => {
   try {
     dispatch(loginRequest());
-    const { data } = await axiosInstance.post(
+    const { data } = await axios.post(
       `${backendUrl}/user/login`,
       userData
     );
+    localStorage.setItem('token', data.token);
     dispatch(loginSuccess(data));
     toast.success("Login Successful", {
       position: "bottom-right",
@@ -61,29 +60,32 @@ export const login = (userData) => async (dispatch) => {
   }
 };
 
-// Logout User
-export const logout = () => async (dispatch) => {
-  try {
-    dispatch(logoutRequest());
-    await axiosInstance.get(`${backendUrl}/user/logout`);
-    dispatch(logoutSuccess());
-    toast.success("Logout Successful", {
-      position: "bottom-right",
-      autoClose: 1000,
-    });
-  } catch (error) {
-    dispatch(logoutFailure());
-    toast.error(error.response.data);
-  }
-};
-
 // Load User
 export const loadUser = () => async (dispatch) => {
   try {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(loadUserRequest());
-    const { data } = await axiosInstance.get(`${backendUrl}/user/me`);
+    const { data } = await axios.get(`${backendUrl}/user/me`);
     dispatch(loadUserSuccess(data));
   } catch (error) {
+    console.log(error.response.data.errorMessage)
     dispatch(loadUserFailure());
   }
 };
+
+// Logout User
+// export const logout = () => async (dispatch) => {
+//   try {
+//     dispatch(logoutRequest());
+//     await axios.get(`${backendUrl}/user/logout`);
+//     dispatch(logoutSuccess());
+//     toast.success("Logout Successful", {
+//       position: "bottom-right",
+//       autoClose: 1000,
+//     });
+//   } catch (error) {
+//     dispatch(logoutFailure());
+//     toast.error(error.response.data);
+//   }
+// };

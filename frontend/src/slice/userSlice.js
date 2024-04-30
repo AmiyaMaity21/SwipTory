@@ -77,21 +77,6 @@ const userSlice = createSlice({
       state.userId = null;
       state.loginError  = action.payload.errorMessage;
     },
-
-    logoutRequest: (state) => {
-      state.loading = true;
-    },
-    logoutSuccess: (state) => {
-      state.loading = false;
-      state.isAuthenticated = false;
-      state.username = null;
-      state.token = null;
-      state.userId = null;
-      state.user = null;
-    },
-    logoutFailure: (state) => {
-      state.loading = false;
-    },
   },
 });
 
@@ -102,9 +87,6 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
-  logoutRequest,
-  logoutSuccess,
-  logoutFailure,
   loadUserSuccess,
   loadUserFailure,
   loadUserRequest,
