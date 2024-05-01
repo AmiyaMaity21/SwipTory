@@ -175,23 +175,25 @@
     .storyForm {
         width: 60%;
         flex-direction: row;
-        padding: 1rem 0.5rem 5rem;
+        padding: 3rem 0.75rem 6.5rem;
     }
 
     .slideFormContainer>h2 {
         display: block;
-        margin: 0 0 3rem 0;
+        font-size: 18px;
+        margin: 0 0 2rem 0;
     }
 
     .slideFormInputContainer {
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+        gap:0.5rem;
     }
 
     .slideFormLabel {
         width: 100%;
-        font-size: 1rem;
+        font-size: 15px;
     }
 
     .slideFormInputField {
@@ -200,7 +202,7 @@
     }
 
     .slideFormInputContainer>select {
-        width: 97%;
+        width: 100%;
         margin-bottom: 0;
         margin-left: 0;
     }
@@ -208,22 +210,20 @@
     .storySlideMenu {
         width: 30%;
         flex-direction: column;
-        padding: 4rem 0;
-        margin-top: 4rem;
     }
 
     .slideBox {
-        padding: 1rem 0.5rem;
-        border-radius: 0.6rem;
+        padding: 0.75rem 0.5rem;
+        border-radius: 10px;
         text-align: center;
-        font-size: 0.8rem;
-        margin-right: 0.5rem;
+        font-size: 0.6rem;
+        margin-right: 1rem;
         margin-bottom: 0.8rem;
     }
 
     .storyBtn {
         position: absolute;
-        bottom: 12%;
+        bottom: 3.5rem;
     }
 
     .prevBtn,
@@ -246,4 +246,5 @@
     .storyBtn {
         width: 25%;
     }
+    
 }

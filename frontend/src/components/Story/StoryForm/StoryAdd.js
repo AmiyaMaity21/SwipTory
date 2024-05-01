@@ -84,7 +84,6 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
 
   useEffect(() => {
     if (editStory) {
-      // Initialize state with existing story data for editing
       setSlides(editStory.slides);
     }
   }, [editStory]);
@@ -115,9 +114,9 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
     }
 
     if (editStory && editStory._id) {
-      const storyId = editStory._id; // Extract storyId from editStory object
+      const storyId = editStory._id; 
       const updatedStory = {
-        storyId, // Pass storyId to updateStory action
+        storyId, 
         slides,
       };
       dispatch(updateStory(updatedStory));

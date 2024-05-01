@@ -5,8 +5,14 @@ const isAuthenticatedUser = async (req, res, next) => {
   try {
     // const token = req.cookies.token;
     // const token = req.header("Authorization");
-    const authHeader = req.header("Authorization").split(" ");
-    const token = authHeader[1];
+    // const authHeader = req.header("Authorization").split(" ");
+    // const token = authHeader[1];
+
+    const authHeader = req.header("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ errorMessage: "Please provide a valid token in the Authorization header" });
+    }
+    const token = authHeader.split(" ")[1];
     
     if (!token) {
       return res

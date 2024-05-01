@@ -4,7 +4,7 @@ import avatar from "../../assets/man.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "../../actions/userAction";
+import { logout } from "../../actions/userAction";
 import { FaBookmark } from "react-icons/fa";
 
 const Navbar = ({ showRegisterForm, showLoginForm, showStoryForm }) => {
@@ -17,14 +17,12 @@ const Navbar = ({ showRegisterForm, showLoginForm, showStoryForm }) => {
     setMenuOpen(!menuOpen);
   };
   const handleLogout = () => {
-    localStorage.clear();
-    dispatch(loadUser());
+    dispatch(logout());
     navigate("/");
   };
   return (
     <div className="navbarContainer">
       <h2 className="navLogo">SwipTory</h2>
-      {/* DesktopView */}
       <div className="navBtn">
         {!isAuthenticated ? (
           <>
@@ -71,7 +69,6 @@ const Navbar = ({ showRegisterForm, showLoginForm, showStoryForm }) => {
         )}
       </div>
 
-      {/* MobileView */}
       <div className="navBtnMobile">
         {!isAuthenticated ? (
           <>

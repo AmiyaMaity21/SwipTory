@@ -1,5 +1,4 @@
 import axios from "axios";
-// import axiosInstance from './axiosInstance';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -12,6 +11,12 @@ import {
   getStoryByUserRequest,
   getStoryByUserSuccess,
   getStoryByUserFailure,
+  getStoryRequest,
+  getStorySuccess,
+  getStoryFailure,
+  editStoryRequest,
+  editStorySuccess,
+  editStoryFailure,
   getBookmarksRequest,
   getBookmarksSuccess,
   getBookmarksFailure,
@@ -21,12 +26,6 @@ import {
   likeRequest,
   likeSuccess,
   likeFailure,
-  getStoryRequest,
-  getStorySuccess,
-  getStoryFailure,
-  editStoryRequest,
-  editStorySuccess,
-  editStoryFailure,
 } from "../slice/storySlice";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -38,7 +37,10 @@ export const createStory = (slides) => async (dispatch) => {
     dispatch(createStoryRequest());
     const { data } = await axios.post(`${backendUrl}/story/create`, { slides });
     dispatch(createStorySuccess(data));
-    toast.success("Story created successfully", { position: "top-center", autoClose: 2000});
+    toast.success("Story created successfully", {
+      position: "top-center",
+      autoClose: 2000,
+    });
   } catch (error) {
     dispatch(createStoryFailure());
     toast.error(error.response.data.errorMessage, { position: "top-center" });
@@ -83,7 +85,9 @@ export const getStory = (storyId, userId) => async (dispatch) => {
   try {
     dispatch(getStoryRequest());
     if (userId == null) {
-      const { data } = await axios.get(`${backendUrl}/story/details/${storyId}`);
+      const { data } = await axios.get(
+        `${backendUrl}/story/details/${storyId}`
+      );
       dispatch(getStorySuccess(data));
     } else {
       const { data } = await axios.get(
@@ -104,11 +108,12 @@ export const updateStory = (updatedStory) => async (dispatch) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     dispatch(editStoryRequest());
     const { data } = await axios.put(
-      `${backendUrl}/story/edit/${updatedStory.storyId}`,
-      updatedStory, { withCredentials: true }
-    );
+      `${backendUrl}/story/edit/${updatedStory.storyId}`, updatedStory);
     dispatch(editStorySuccess(data));
-    toast.success("Story updated successfully", { position: "top-center", autoClose: 2000 });
+    toast.success("Story updated successfully", {
+      position: "top-center",
+      autoClose: 2000,
+    });
   } catch (error) {
     dispatch(editStoryFailure());
     toast.error(error.response.data.errorMessage, { position: "top-center" });
@@ -137,7 +142,10 @@ export const bookmarkStory = (id) => async (dispatch) => {
     dispatch(bookmarkRequest());
     const { data } = await axios.post(`${backendUrl}/story/bookmark/${id}`);
     dispatch(bookmarkSuccess(data.story));
-    toast.success("Story bookmarked successfully", { position: "top-center", autoClose: 2000 });
+    toast.success("Story bookmarked successfully", {
+      position: "top-center",
+      autoClose: 2000,
+    });
   } catch (error) {
     dispatch(bookmarkFailure());
     toast.error(error.response.data.errorMessage, { position: "top-center" });
@@ -152,9 +160,15 @@ export const likeStory = (id) => async (dispatch) => {
     dispatch(likeRequest());
     const data = await axios.put(`${backendUrl}/story/like/${id}`);
     dispatch(likeSuccess(data.story));
-    toast.success("Story liked successfully", { position: "top-center", autoClose: 2000 });
+    toast.success("Story liked successfully", {
+      position: "top-center",
+      autoClose: 2000,
+    });
   } catch (error) {
     dispatch(likeFailure());
-    toast.error(error.response.data.errorMessage, { position: "top-center", autoClose: 2000 });
+    toast.error(error.response.data.errorMessage, {
+      position: "top-center",
+      autoClose: 2000,
+    });
   }
 };

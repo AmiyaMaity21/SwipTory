@@ -143,7 +143,7 @@ const StoryDetails = () => {
                             : "white",
                       }}
                     />
-                    <p className="totalLikes">{totalLikes + (newLike ? 1 : 0)}</p>
+                    <p>{totalLikes + (newLike ? 1 : 0)}</p>
                   </button>
                 </div>
               </div>

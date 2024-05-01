@@ -56,6 +56,33 @@ const storySlice = createSlice({
     getStoryByUserFailure: (state) => {
       state.storiesLoading = false;
     },
+    getStoryRequest: (state) => {
+      state.storyLoading = true;
+      state.newLike = false;
+    },
+    getStorySuccess: (state, action) => {
+      state.storyLoading = false;
+      state.story = action.payload.story;
+      state.liked = action.payload.liked;
+      state.totalLikes = action.payload.totalLikes;
+      state.bookmarked = action.payload.bookmarked;
+    },
+    getStoryFailure: (state) => {
+      state.storyLoading = false;
+    },
+    editStoryRequest: (state) => {
+      state.storyLoading = true;
+      state.editStory = false;
+    },
+    editStorySuccess: (state, action) => {
+      state.storyLoading = false;
+      state.story = action.payload;
+      state.editStory = true;
+    },
+    editStoryFailure: (state) => {
+      state.storyLoading = false;
+      state.editStory = false;
+    },
     getBookmarksRequest: (state) => {
       state.bookmarksLoading = true;
     },
@@ -89,34 +116,7 @@ const storySlice = createSlice({
       state.storyLoading = false;
       state.newLike = false;
     },
-    getStoryRequest: (state) => {
-      state.storyLoading = true;
-      state.newLike = false;
-    },
-    getStorySuccess: (state, action) => {
-      state.storyLoading = false;
-      state.story = action.payload.story;
-      state.liked = action.payload.liked;
-      state.totalLikes = action.payload.totalLikes;
-      state.bookmarked = action.payload.bookmarked;
-    },
-
-    getStoryFailure: (state) => {
-      state.storyLoading = false;
-    },
-    editStoryRequest: (state) => {
-      state.storyLoading = true;
-      state.editStory = false;
-    },
-    editStorySuccess: (state, action) => {
-      state.storyLoading = false;
-      state.story = action.payload;
-      state.editStory = true;
-    },
-    editStoryFailure: (state) => {
-      state.storyLoading = false;
-      state.editStory = false;
-    },
+    
   },
 });
 
@@ -130,6 +130,12 @@ export const {
   getStoryByUserRequest,
   getStoryByUserSuccess,
   getStoryByUserFailure,
+  getStoryRequest,
+  getStorySuccess,
+  getStoryFailure,
+  editStoryRequest,
+  editStorySuccess,
+  editStoryFailure,
   getBookmarksRequest,
   getBookmarksSuccess,
   getBookmarksFailure,
@@ -139,12 +145,6 @@ export const {
   likeRequest,
   likeSuccess,
   likeFailure,
-  getStoryRequest,
-  getStorySuccess,
-  getStoryFailure,
-  editStoryRequest,
-  editStorySuccess,
-  editStoryFailure,
 } = storySlice.actions;
 
 export default storySlice.reducer;

@@ -97,13 +97,12 @@ const getAllStories = async (req, res, next) => {
       await Promise.all(
         categories.map(async (category) => {
           const categoryStories = await Story.find({
-            slides: { $elemMatch: { category: category } }, // Find stories with slides that match the current category
+            slides: { $elemMatch: { category: category } },
           })
-            .sort({ createdAt: -1 }) // Sort the stories by creation date, newest first
+            .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(cat === category ? catLimit : 4); // Limit the number of stories to retrieve per category
+            .limit(cat === category ? catLimit : 4);
 
-          // Add the category and its stories to the groupedStories object
           groupedStories[category] = categoryStories;
         })
       );
@@ -118,10 +117,98 @@ const getAllStories = async (req, res, next) => {
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
-        categoryStories[category] = stories;
-      return res.status(200).json({ success: true, stories:categoryStories, page });
+      categoryStories[category] = stories;
+      return res
+        .status(200)
+        .json({ success: true, stories: categoryStories, page });
     }
     res.status(200).json({ success: true, stories, page });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Like a story
+const likeStory = async (req, res, next) => {
+  try {
+    const story = await Story.findById(req.params.id);
+    if (!story) {
+      return res.status(404).json({ error: "Story not found" });
+    }
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    if (user.likes.includes(req.params.id)) {
+      return res
+        .status(400)
+        .json({
+          errorMessage: "User already liked this story",
+          liked: true,
+          story,
+        });
+    }
+    user.likes.push(req.params.id);
+    story.likes.push(req.user.id);
+    story.totalLikes = story.likes.length;
+    await Promise.all([story.save(), user.save()]);
+    res.json({
+      message: "Story liked successfully",
+      totalLikes: story.totalLikes,
+      story,
+      liked: true,
+      likes: story.likes,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Bookmark a story
+const bookmarkStory = async (req, res, next) => {
+  try {
+    const story = await Story.findById(req.params.id);
+    if (!story) {
+      return res.status(404).json({ errorMessage: "Story not found" });
+    }
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ errorMessage: "User not found" });
+    }
+    if (user.bookmarks.includes(req.params.id)) {
+      return res
+        .status(400)
+        .json({
+          errorMessage: "User already bookmarked",
+          bookmarked: true,
+          story,
+        });
+    }
+    story.bookmarks.push(req.user.id);
+    user.bookmarks.push(req.params.id);
+    await Promise.all([story.save(), user.save()]);
+    res.json({
+      message: "Story bookmarked successfully",
+      story,
+      bookmarked: true,
+      bookmarks: user.bookmarks,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Get All Bookmarks
+const getAllBookmarks = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    const bookmarks = await Story.find({ _id: { $in: user.bookmarks } }).sort({
+      createdAt: -1,
+    });
+    res.json({ bookmarks });
   } catch (error) {
     next(error);
   }
@@ -132,4 +219,7 @@ module.exports = {
   getStoryDetailsById,
   updateStoryDetailsById,
   getAllStories,
+  likeStory,
+  bookmarkStory,
+  getAllBookmarks,
 };

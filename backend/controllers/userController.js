@@ -89,16 +89,15 @@ const getUserDetails = async (req, res, next) => {
 };
 
 // Logout User
-// const logoutUser = (req, res, next) => {
-//   try {
-//     res.clearCookie("token");
-//     res.status(200).json({
-//       success: true,
-//       message: "Successfully Logged Out",
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+const logoutUser = (req, res, next) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: "Successfully Logged Out",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
-module.exports = { registerUser, loginUser, getUserDetails };
+module.exports = { registerUser, loginUser, getUserDetails, logoutUser };
