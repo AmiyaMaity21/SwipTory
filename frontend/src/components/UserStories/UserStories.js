@@ -1,18 +1,27 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./UserStories.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getStoriesByUser } from "../../actions/storyAction";
 import { useSelector } from "react-redux";
 import StoryCard from "../../components/Story/StoryCard/StoryCard";
+import StoryAdd from "../../components/Story/StoryForm/StoryAdd";
 import Loader from "../Loader/Loader";
 
 const Stories = () => {
   const navigate = useNavigate();
-  const { userStories, storiesLoading } = useSelector((state) => state.story);
-  const { userId, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [editStory, setEditStory] = useState(null);
+  const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+
+  const { userStories, storiesLoading } = useSelector((state) => state.story);
+  const { userId, isAuthenticated } = useSelector((state) => state.user);
+
+  const handleEditClick = (story) => {
+    setEditStory(story);
+    setIsEditFormOpen(true);
+  };
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
@@ -31,7 +40,11 @@ const Stories = () => {
           <div className="yourStoriesContainer">
             {userStories?.length > 0 &&
               userStories.map((story) => (
-                <StoryCard story={story} key={story.id} />
+                <StoryCard
+                  story={story}
+                  key={story.id}
+                  onEditClick={handleEditClick}
+                />
               ))}
 
             {userStories?.length === 0 && (
@@ -47,6 +60,11 @@ const Stories = () => {
           </div>
         </div>
       )}
+      <StoryAdd
+        isStoryFormOpen={isEditFormOpen}
+        onClose={() => setIsEditFormOpen(false)}
+        editStory={editStory}
+      />
     </Fragment>
   );
 };
