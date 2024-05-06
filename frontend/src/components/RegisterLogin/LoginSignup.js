@@ -69,7 +69,7 @@ const LoginSignup = ({ isRegisterFormOpen, isLoginFormOpen, onClose }) => {
                       <label>Username</label>
                       <input
                         type="text"
-                        placeholder="Username"
+                        placeholder="Enter username"
                         value={registerFormData.username}
                         name="username"
                         onChange={handleRegisterFormChange}
@@ -81,7 +81,7 @@ const LoginSignup = ({ isRegisterFormOpen, isLoginFormOpen, onClose }) => {
                       <label>Password</label>
                       <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
+                        placeholder="Enter password"
                         value={registerFormData.password}
                         name="password"
                         onChange={handleRegisterFormChange}
@@ -123,7 +123,7 @@ const LoginSignup = ({ isRegisterFormOpen, isLoginFormOpen, onClose }) => {
                       <label>Username</label>
                       <input
                         type="text"
-                        placeholder="Username"
+                        placeholder="Enter username"
                         value={loginFormData.username}
                         name="username"
                         onChange={handleLoginFormChange}
@@ -135,7 +135,7 @@ const LoginSignup = ({ isRegisterFormOpen, isLoginFormOpen, onClose }) => {
                       <label>Password</label>
                       <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
+                        placeholder="Enter password"
                         value={loginFormData.password}
                         name="password"
                         onChange={handleLoginFormChange}

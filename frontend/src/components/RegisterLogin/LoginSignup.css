@@ -26,21 +26,19 @@
     z-index: 100;
 }
 
-.formContainer>div:first-child {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-}
-
 .formCloseBtn {
+    position: absolute;
     background-color: white;
     color: #FF0000;
     border: 2px solid #FF0000;
+    font-size: 1.25rem;
+    font-weight: 700;
     cursor: pointer;
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    padding: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    top: 3rem;
+    right: 3rem;
 }
 
 .formHeading {
@@ -58,7 +56,7 @@
 }
 
 .inputContainer>label {
-    font-size: 1rem;
+    font-size: 20px;
     font-weight: 700;
 }
 
@@ -66,9 +64,9 @@
     width: 70%;
     border: 1px solid black;
     outline: none;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 12px;
 }
 
 .buttonContainer {
@@ -101,7 +99,7 @@
 .showingPassword {
     position: absolute;
     right: 6.5rem;
-    bottom: 9.75rem;
+    bottom: 10.25rem;
     font-size: 1rem;
     cursor: pointer;
 }
@@ -110,10 +108,9 @@
     width: 100%;
     position: absolute;
     left: 50%;
-    transform: translate(-50%,-25%);
+    transform: translate(-50%, -25%);
     display: flex;
     justify-content: center;
-    
 }
 
 .error {
@@ -126,13 +123,16 @@
 @media screen and (max-width: 768px) {
     .formContainer {
         width: 60%;
-        padding: 1rem 0 5rem 1rem;
+        padding: 1rem 1rem 4.5rem 1rem;
     }
 
     .formCloseBtn {
         position: absolute;
+        font-size: 1rem;
         right: 1rem;
         top: 1rem;
+        width: 1.75rem;
+        height: 1.75rem;
     }
 
     .formHeading {
@@ -144,10 +144,15 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-bottom: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .inputContainer>label {
+        font-size: 15px;
     }
 
     .inputField {
+        font-size: 10px;
         margin-top: 0.5rem;
         width: 90%;
     }
@@ -157,12 +162,21 @@
         right: 0;
     }
 
-    .showingPassword {
-        right: 1rem;
-        bottom: 12.75rem;
+    .buttonContainer {
+        margin-top: 2rem;
     }
+
+    .buttonContainer>button {
+        color: #fff;
+    }
+
+    .showingPassword {
+        right: 1.25rem;
+        bottom: 12.15rem;
+    }
+
     .errorContainer {
-        transform: translate(-50%,-200%);
+        bottom: 8.75rem;
     }
 
 }
