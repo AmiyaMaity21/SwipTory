@@ -21,7 +21,8 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
 
   useEffect(() => {
     setCurrentSlide(currentSlide);
-  }, [currentSlide, dispatch]);
+    console.log("currentSlide", currentSlide);
+  }, [currentSlide]);
 
   const handleAddSlide = () => {
     if (slides.length < 6) {
@@ -31,7 +32,7 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
   };
 
   const handleRemoveSlide = (index) => {
-    setSlides((prevSlides) => prevSlides.filter((_, i) => i !== index));
+    setSlides((prevSlides) => prevSlides.filter((element, i) => i !== index));
     handlePrevClick();
   };
 
@@ -47,14 +48,12 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
       currentSlideFields.imageUrl?.trim() !== "" &&
       currentSlideFields.category?.trim() !== "";
     if (!isFilled) {
-      setError("Please fill out all fields before proceeding.");
-      return;
+      setError("Please fill out all fields before proceeding");
     } else {
-      setError("");
+      setCurrentSlide(
+        currentSlide < slides.length - 1 ? currentSlide + 1 : slides.length - 1
+      );
     }
-    setCurrentSlide(
-      currentSlide < slides.length - 1 ? currentSlide + 1 : slides.length - 1
-    );
   };
 
   const handleValidate = (name, value) => {
@@ -89,34 +88,28 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
   }, [editStory]);
 
   const handleStorySubmit = () => {
-    const isValid = slides.some((slide, index) => {
-      if (
-        Object.keys(slide).length === 0 ||
-        slide.heading?.trim() === "" ||
-        slide.description?.trim() === "" ||
-        slide.imageUrl?.trim() === "" ||
-        slide.category?.trim() === ""
-      ) {
-        setError(slide, index);
-      }
-      return (
-        Object.keys(slide).length === 0 ||
-        slide.heading?.trim() === "" ||
-        slide.description?.trim() === "" ||
-        slide.imageUrl?.trim() === "" ||
-        slide.category?.trim() === ""
-      );
-    });
+    const isValid = slides.every(
+      (slide) =>
+        slide.heading?.trim() !== "" &&
+        slide.description?.trim() !== "" &&
+        slide.imageUrl?.trim() !== "" &&
+        slide.category?.trim() !== ""
+    );
 
-    if (isValid) {
-      setError("Please fill out at least 3 slides.");
+    if (!isValid) {
+      setError("Please fill out all fields of each slides");
+      return;
+    }
+
+    if (slides.length < 3) {
+      setError("Please fill out at least 3 slides");
       return;
     }
 
     if (editStory && editStory._id) {
-      const storyId = editStory._id; 
+      const storyId = editStory._id;
       const updatedStory = {
-        storyId, 
+        storyId,
         slides,
       };
       dispatch(updateStory(updatedStory));
@@ -134,75 +127,75 @@ const StoryAdd = ({ isStoryFormOpen, onClose, editStory }) => {
       {isStoryFormOpen && (
         <>
           <div className="modal-backdrop" onClick={onClose}></div>
-          <div className="storyForm">
-            <div className="storySlideMenu">
-              {slides.map((slide, index) => (
+            <div className="storyForm">
+              <div className="storySlideMenu">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className="slideBox"
+                    onClick={() => setCurrentSlide(index)}
+                    style={{
+                      border:
+                        currentSlide === index ? "2px solid #73ABFF" : "none",
+                    }}
+                  >
+                    slide {index + 1}
+                    {index >= 3 && (
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveSlide(currentSlide);
+                        }}
+                        className="slideCloseBtn"
+                      >
+                        X
+                      </span>
+                    )}
+                  </div>
+                ))}
                 <div
                   className="slideBox"
-                  onClick={() => setCurrentSlide(index)}
-                  style={{
-                    border:
-                      currentSlide === index ? "2px solid #73ABFF" : "none",
-                  }}
+                  onClick={handleAddSlide}
+                  style={{ cursor: "pointer" }}
                 >
-                  slide {index + 1}
-                  {index >= 3 && (
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveSlide(currentSlide);
-                      }}
-                      className="slideCloseBtn"
-                    >
-                      X
-                    </span>
-                  )}
+                  Add +
                 </div>
-              ))}
-              <div
-                className="slideBox"
-                onClick={handleAddSlide}
-                style={{ cursor: "pointer" }}
-              >
-                Add +
               </div>
-            </div>
-            <div>
-              <button className="addStoryFormCloseBtn" onClick={onClose}>
-                X
-              </button>
-            </div>
-            <div className="slideFormContainer">
-              <h2>Add story to feed</h2>
-              {slides.map((slide, slideIndex) => (
-                <>
-                  {slideIndex === currentSlide && (
-                    <SlideForm
-                      key={slideIndex}
-                      slide={slide}
-                      slideIndex={slideIndex}
-                      handleChange={(e) => handleChange(e, slideIndex)}
-                      handleRemoveSlide={() => handleRemoveSlide(slideIndex)}
-                    />
-                  )}
-                </>
-              ))}
-            </div>
-            {error && <span className="formError">{error}</span>}
-            <div className="storyBtn">
               <div>
-                <button className="prevBtn" onClick={handlePrevClick}>
-                  Previous
-                </button>
-                <button className="nextBtn" onClick={handleNextClick}>
-                  Next
+                <button className="addStoryFormCloseBtn" onClick={onClose}>
+                  X
                 </button>
               </div>
-              <button className="postBtn" onClick={handleStorySubmit}>
-                Post
-              </button>
+              <div className="slideFormContainer">
+                <h2>Add story to feed</h2>
+                {slides.map((slide, slideIndex) => (
+                  <>
+                    {slideIndex === currentSlide && (
+                      <SlideForm
+                        key={slideIndex}
+                        slide={slide}
+                        slideIndex={slideIndex}
+                        handleChange={(e) => handleChange(e, slideIndex)}
+                      />
+                    )}
+                  </>
+                ))}
+              </div>
+              {error && <span className="formError">{error}</span>}
+              <div className="storyBtn">
+                <div>
+                  <button className="prevBtn" onClick={handlePrevClick}>
+                    Previous
+                  </button>
+                  <button className="nextBtn" onClick={handleNextClick}>
+                    Next
+                  </button>
+                </div>
+                <button className="postBtn" onClick={handleStorySubmit}>
+                  Post
+                </button>
+              </div>
             </div>
-          </div>
         </>
       )}
     </>
